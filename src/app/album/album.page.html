@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar [style.--background]="data.backgroundColor">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">{{data.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  *ngIf="data"
+  [style.--custombg]="data.backgroundColor"
+  [appImageFade]="cover"
+  scrollEvents="true"
+  [fullscreen]="true"
+>
+  <div class="ion-text-center image-box" #cover>
+    <img [src]="'assets/images/albums/'+dasherize(data.image)+'.jpg'" alt="" />
+  </div>
+
+  <div class="main">
+    <ion-row>
+      <ion-col size="12" class="album-info">
+        <p>{{data.artist}}</p>
+        <span>Album {{data.title}} . {{data.released}}</span>
+      </ion-col>
+      <ion-col size="8" class="ion-text-left ion-no-padding">
+        <ion-button fill="clear" class="ion-no-margin">
+          <ion-icon
+            slot="icon-only"
+            name="heart-outline"
+            color="light"
+          ></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear">
+          <ion-icon
+            slot="icon-only"
+            name="arrow-down-circle-outline"
+            color="light"
+          ></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear">
+          <ion-icon
+            slot="icon-only"
+            name="ellipsis-horizontal"
+            color="light"
+          ></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="4" class="ion-text-right ion-no-padding">
+        <ion-button fill="clear">
+          <ion-icon
+            slot="icon-only"
+            name="play-circle"
+            size="large"
+            color="primary"
+          ></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-list>
+      <ion-item *ngFor="let item of data.tracks" lines="none">
+        <ion-label
+          >{{item.title}}
+          <p>{{data.artist}}</p></ion-label
+        >
+        <ion-icon
+          slot="end"
+          name="ellipsis-horizontal"
+          size="small"
+          color="light"
+        ></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
